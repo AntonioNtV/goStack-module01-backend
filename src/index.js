@@ -15,12 +15,35 @@ app.use(express.json())
 
  /**
   * Tipos de parâmetros:
+  * 
   * Query Params: Filtros e Paginação
   * Route Params: Identificar recursos (Atualizar ou Deletar).
   * Request Body: Conteúdo na hora de criar ou editar um recurso (JSON)
   */
 
+  /**
+   * Middleware
+   * 
+   * Interceptador de Requisições que interrompe totalmente a requisição ou alterar dados da requisição.
+   * 
+   */
+
 const projects = []
+
+function logRequest(request, response, next) {
+    const { method, url } = request
+
+    const logLabel = `[${method.toUpperCase()}] ${url}`
+
+    console.time(logLabel)
+
+    next()
+
+    console.timeEnd(logLabel)
+
+}
+
+app.use(logRequest)
 
 app.get('/projects', (request, response) => {
     const { title } = request.query
@@ -28,7 +51,7 @@ app.get('/projects', (request, response) => {
     const results = title
         ? projects.filter( project => project.title.includes(title))
         : projects
-        
+
     return response.json(results)
 })
 
