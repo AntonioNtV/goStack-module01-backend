@@ -13,7 +13,20 @@ app.use(express.json())
  * DELETE: Deletar uma informação no Backend
  */
 
+ /**
+  * Tipos de parâmetros:
+  * Query Params: Filtros e Paginação
+  * Route Params: 
+  * Request Body:
+  * 
+  */
+
+
 app.get('/projects', (request, response) => {
+    const { title, owner } = request.query
+
+    console.log(title, owner);
+
     return response.json([
         'Projeto 1',
         'Projeto 2'
