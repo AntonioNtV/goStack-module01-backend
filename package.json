@@ -5,7 +5,8 @@
   "author": "AntonioNtV <antoniontv18@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "uuidv4": "^6.2.2"
   },
   "scripts": {
     "dev": "nodemon src/index.js"
