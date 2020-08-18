@@ -20,6 +20,14 @@ app.get('/projects', (request, response) => {
     ])
 })
 
+app.post('/projects', (request, response) => {
+    return response.json([
+        'Projeto 1',
+        'Projeto 2',
+        'Projeto 3'
+    ])
+})
+
 
 
 app.use(express.json())
