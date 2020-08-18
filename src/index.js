@@ -36,7 +36,12 @@ app.put('/projects/:id', (request, response) => {
     ])
 })
 
-
+app.delete('/projects/:id', (request, response) => {
+    return response.json([
+        'Projeto 4',
+        'Projeto 3'
+    ])
+})
 
 app.use(express.json())
 
