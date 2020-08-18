@@ -16,8 +16,8 @@ app.use(express.json())
  /**
   * Tipos de parâmetros:
   * Query Params: Filtros e Paginação
-  * Route Params: 
-  * Request Body:
+  * Route Params: Identificar recursos (Atualizar ou Deletar).
+  * Request Body: Conteúdo na hora de criar ou editar um recurso
   * 
   */
 
@@ -42,6 +42,10 @@ app.post('/projects', (request, response) => {
 })
 
 app.put('/projects/:id', (request, response) => {
+    const { id } = request.params
+
+    console.log('id:', id);
+
     return response.json([
         'Projeto 4',
         'Projeto 2',
@@ -50,6 +54,10 @@ app.put('/projects/:id', (request, response) => {
 })
 
 app.delete('/projects/:id', (request, response) => {
+    const { id } = request.params
+
+    console.log('id:', id);
+
     return response.json([
         'Projeto 4',
         'Projeto 3'
