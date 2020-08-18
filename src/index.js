@@ -1,13 +1,26 @@
 const express = require('express')
+const { response } = require('express')
 
 const app = express()
 app.use(express.json())
 
-app.get('/', (request, response) => {
-    return response.json({
-        message: 'Hello World'
-    })
+/**
+ * Métodos HTTP
+ * 
+ * GET: Buscar Informações do Backend
+ * POST: Criar uma informação no Backend
+ * PUT/PATCH: Alterar uma informação no Backend
+ * DELETE: Deletar uma informação no Backend
+ */
+
+app.get('/projects', (request, response) => {
+    return response.json([
+        'Projeto 1',
+        'Projeto 2'
+    ])
 })
+
+
 
 app.use(express.json())
 
