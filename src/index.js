@@ -1,4 +1,5 @@
 const express = require('express')
+const { v4 } = require('uuid')
 
 const app = express()
 app.use(express.json())
@@ -18,7 +19,7 @@ app.use(express.json())
   * Route Params: Identificar recursos (Atualizar ou Deletar).
   * Request Body: Conteúdo na hora de criar ou editar um recurso (JSON)
   */
-
+const projects = []
 
 app.get('/projects', (request, response) => {
     const { title, owner } = request.query
@@ -34,13 +35,15 @@ app.get('/projects', (request, response) => {
 app.post('/projects', (request, response) => {
     const { title, owner } = request.body
     
-    console.log(title, owner);
+    const project = {
+        id: v4(),
+        title,
+        owner,
+    }
 
-    return response.json([
-        'Projeto 1',
-        'Projeto 2',
-        'Projeto 3'
-    ])
+    projects.push(project)
+
+    return response.json(project)
 })
 
 app.put('/projects/:id', (request, response) => {
