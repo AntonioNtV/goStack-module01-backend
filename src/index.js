@@ -1,5 +1,5 @@
 const express = require('express')
-const { v4 } = require('uuid')
+const { v4, validate } = require('uuid')
 
 const app = express()
 app.use(express.json())
@@ -43,6 +43,19 @@ function logRequest(request, response, next) {
 
 }
 
+function validateProjectId(request, response, next) {
+    const { id } = request.params
+
+    if (!validate(id)) {
+        return response.status(400).json({
+            error: 'Invalid project ID'
+        })
+    }
+    
+    return next()
+
+}
+
 app.use(logRequest)
 
 app.get('/projects', (request, response) => {
@@ -69,7 +82,7 @@ app.post('/projects', (request, response) => {
     return response.json(project)
 })
 
-app.put('/projects/:id', (request, response) => {
+app.put('/projects/:id', validateProjectId, (request, response) => {
     const { id } = request.params
     const { title, owner } = request.body
     
@@ -92,7 +105,7 @@ app.put('/projects/:id', (request, response) => {
     return response.json(project)
 })
 
-app.delete('/projects/:id', (request, response) => {
+app.delete('/projects/:id', validateProjectId, (request, response) => {
     const { id } = request.params
 
     const projectIndex = projects.findIndex( project => project.id === id)
