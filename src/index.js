@@ -17,8 +17,7 @@ app.use(express.json())
   * Tipos de parâmetros:
   * Query Params: Filtros e Paginação
   * Route Params: Identificar recursos (Atualizar ou Deletar).
-  * Request Body: Conteúdo na hora de criar ou editar um recurso
-  * 
+  * Request Body: Conteúdo na hora de criar ou editar um recurso (JSON)
   */
 
 
@@ -34,6 +33,10 @@ app.get('/projects', (request, response) => {
 })
 
 app.post('/projects', (request, response) => {
+    const { title, owner } = request.body
+    
+    console.log(title, owner);
+
     return response.json([
         'Projeto 1',
         'Projeto 2',
